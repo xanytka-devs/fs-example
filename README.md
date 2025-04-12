@@ -4,4 +4,4 @@
 ## Сборка
 * Запустите команду `git clone --recursive https://github.com/xanytka-devs/firesteel-example.git`
 * Установите [CMake](https://cmake.org/)
-* Запустите `AutoCMakeBuild.cmd`
+* Запустите `auto_cmake.cmd`
