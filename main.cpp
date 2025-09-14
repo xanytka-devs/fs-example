@@ -5,10 +5,10 @@ using namespace Firesteel;
 
 // Entities are basicly 3d models,
 // that will be rendered in update function.
-Entity box{glm::vec3(0, 0, -5), glm::vec3(-45, 0, 45)};
+Entity box{glm::vec3(0, 0, -5), glm::vec3(45, 45, 0)};
 // Shader that will define how the box is drawn.
 // Learn more: https://learnopengl.com/Getting-started/Shaders
-Shader shader;
+std::shared_ptr<Shader> shader;
 // Camera that will help with displaying box in perspective.
 Camera camera{glm::vec3(0), glm::vec3(0, 0, -90)};
 
@@ -16,9 +16,10 @@ class ExampleApp : public App {
 	// Runs after window and renderer initialization.
 	virtual void onInitialize() override {
 		// Loads model for entity from file.
-		box.loadFromFile("res\\box.obj");
+		box.load("res\\box.obj");
 		// Initializes shader from vertex and fragment ones.
-		shader = Shader("res/shader.vs", "res/shader.fs");
+		shader=std::make_shared<Shader>("res/shader.vs", "res/shader.fs");
+		box.setMaterialsShader(shader);
 		// Get current camera vectors;
 		camera.update();
 	}
@@ -34,18 +35,18 @@ class ExampleApp : public App {
 		glm::mat4 projection = camera.getProjection(),
 			view = camera.getView();
 		// Enables and sets parameters of shader for box.
-		shader.enable();
-		shader.setMat4("projection", projection);
-		shader.setMat4("view", view);
+		shader->enable();
+		shader->setMat4("projection", projection);
+		shader->setMat4("view", view);
 		// Draw the box itself.
-		box.draw(&shader);
+		box.draw();
 	}
 	
 	// Runs after window.close() is called or on window closing.
 	virtual void onShutdown() override {
 		// Clean up leftover resources.
-		box.clearMeshes();
-		shader.remove();
+		box.remove();
+		shader->remove();
 	}
 };
 
