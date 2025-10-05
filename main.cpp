@@ -1,6 +1,4 @@
-#include "engine/include/app.hpp"
-#include "engine/include/entity.hpp"
-#include "engine/include/camera.hpp"
+#include "engine/include/firesteel.hpp"
 using namespace Firesteel;
 
 // Entities are basicly 3d models,

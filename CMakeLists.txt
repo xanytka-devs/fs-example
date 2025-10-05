@@ -12,6 +12,5 @@ target_link_libraries(example
 	glm
 )
 target_compile_features(example PUBLIC cxx_std_17)
-target_include_directories(example PUBLIC includes)
 target_include_directories(example PUBLIC engine/external/glfw)
 set_target_properties(example PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
